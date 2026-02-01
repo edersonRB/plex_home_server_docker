@@ -22,9 +22,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /home/akitaonrails/organizr:/config
+      - /home/servo/organizr:/config
     ports:
-      - '80:80'
+      - '9001:80'
     cap_add:
       - NET_BIND_SERVICE
 
@@ -41,7 +41,7 @@ services:
     image: zerotier/zerotier:latest
     restart: unless-stopped
     volumes:
-      - /home/akitaonrails/zerotier:/var/lib/zerotier-one
+      - /home/servo/zerotier:/var/lib/zerotier-one
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
@@ -58,6 +58,6 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /home/akitaonrails/librespeed:/config
+      - /home/servo/librespeed:/config
     ports:
       - '9091:80'
