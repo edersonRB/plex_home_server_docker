@@ -1,5 +1,3 @@
-version: '3'
-
 name: 'utils'
 
 volumes:
@@ -45,6 +43,7 @@ services:
       - SECRET_ENCRYPTION_KEY=637d18f88f777efbad4b2f99e6417397dfc8a4cb02c7607be729b4a6c6c5abe3
     ports:
       - '7575:7575'
+    network_mode: host
   dash:
     image: mauricenino/dashdot:latest
     restart: always
@@ -52,4 +51,16 @@ services:
     ports:
       - '8585:3001'
     volumes:
-      - /mnt/Services/dash:/mnt/host:ro
+      - /mnt/satassd/service_data/dash:/mnt/host:ro
+  nginx_proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: always
+    environment:
+      TZ: "America/Sao_paulo"
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - /mnt/satassd/service_data/npm/data:/data
+      - /mnt/satassd/service_data/npm/letsencrypt:/etc/letsencrypt
